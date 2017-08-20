@@ -1,0 +1,107 @@
+name: "learning-apache-spark"
+output_dir: "docs"
+navbar:
+  title: "Learning Apache Spark"
+  type: inverse
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "Getting Start"
+      icon: fa-gear
+      menu:
+        - text: "------------"       
+        - text: "Installations"
+        - text: "Installations"        
+          href:  install.html
+        - text: "------------"            
+        - text: "Integrate Spark"
+        - text: "Integrate spark with Rodeo"
+          href: pyspark-on-rodeo.html
+        - text: "Integrate spark with Jupyter"
+          href: pyspark-on-jupyter.html
+        - text: "Spark on jetstream cloud"
+          href: spark-on-jetstream-cloud.html
+        - text: "------------" 
+        - text: "Data Preprocessing Template"        
+        - text: "Data Preprocessing Template"
+          href: data-preprocessing-template.html
+    - text: "Data Wrangling"
+      icon: fa-gear
+      menu:
+        - text: "Basic DataFrame Manipulation"
+          href: data-manipulation.html
+        - text: "Pyspark Vectors"
+          href: pyspark-vectors.html
+        - text: "featuresCol & labelCol"
+          href: featuresCol-and-labelCol.html
+        - text: "StringIndexer & VectorIndexer"
+          href: StringIndexer-and-VectorIndexer.html
+        - text: "------------"
+        - text: "pyspark.RDD object"
+        - text: "Aggregate Functions"
+          href: aggregate-function.html
+        - text: "Reduce Functions"
+          href: reduce-functions.html
+        - text: "HashingTF and CountVectorizer"
+          href: HashingTF-and-CountVectorizer.html
+        
+    - text: "Machine Learning"
+      icon: fa-gear
+      menu:
+        - text: "------------"
+        - text: "Regression"      
+        - text: "Linear Regression"
+          href:  linearRegression.html
+        - text: "Decision tree Regression"
+          href:  dttreeR.html            
+        - text: "Random Forest Regression"
+          href:  randomforest.html          
+        - text: "-----------"          
+        - text: "Classification"
+        - text: "Kmeans Classification"
+          href:  kmeans.html
+        - text: "Decision tree Classification"
+          href:  dttreeC.html            
+        - text: "Random Forest Classification"
+          href:  randomforestC.html             
+        - text: "Logistic Regression"
+          href: logistic-regression.html
+        - text: "Support Vector Machine"
+          href: svm.html
+        - text: "Naive Bayes"
+          href: naive-baye.html
+        - text: "-----------"          
+        - text: "Neural Network"
+        - text: "Feedforward Neural Network" 
+          href:  fnn.html
+        - text: "-----------"          
+        - text: "Natural Language Processing"
+        - text: "Text Classification" 
+          href:  nlpC.html    
+        - text: "Topic Model LDA" 
+          href:  nlpLDA.html   
+        - text: "-----------"          
+        - text: "Social Network Analysis"
+        - text: "Social Network Analysis" 
+          href:  sna.html            
+    - text: "Module Tuning and Evaluation"
+      icon: fa-gear
+      menu:
+        - text: "-------------"
+        - text: "Module Tuning"
+        - text: "Regularization"
+          href: regularization.html
+        - text: "K-folds Cross Validation"
+          href: k-folds-cross-validation.html
+  right:
+    - icon: fa-github
+      href: https://github.com/MingChen0919/learning-apache-spark
+    - icon: fa-twitter
+      href: https://twitter.com/mingchen0919
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: footer.html       

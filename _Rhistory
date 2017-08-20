@@ -1,0 +1,512 @@
+data %>%
+mutate(newdate=as.Date(X2014.07,"%Y/%M/01"))
+View(data)
+data <-
+data %>%
+mutate(newdate=as.Date(X2014.07,"%Y/%M"))
+View(data)
+data <-
+data %>%
+mutate(newdate=as.yearmon(X2014.07,"%Y/%m"))
+data <-
+data %>%
+mutate(newdate=as.Date(X2014.07, format='%Y-%m-01'))
+View(data)
+data <-
+data %>%
+mutate(newdate=as.Date(X2014.07, format='%Y/%m/01'))
+View(data)
+install.packages("zoo")
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(zoo)
+data <-
+data %>%
+mutate(newdate=s.yearmon(X2014.07, format='%Y/%m/01'))
+data <-
+data %>%
+mutate(newdate = as.yearmon(X2014.07, format='%Y/%m/01'))
+View(data)
+data <-
+data %>%
+mutate(newdate = as.yearmon(X2014.07, format='%Y/%M'))
+View(data)
+data <-
+data %>%
+mutate(newdate = as.yearmon(X2014.07, format='%Y/%m'))
+View(data)
+data %>% ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color =as.factor(X28)))+
+geom_line()+
+geom_point()
+View(data)
+data %>% ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color =as.factor(X28)))+
+geom_line()+
+geom_point() +
+facet_wrap(X28)
+data %>% ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color =as.factor(X28)))+
+geom_line()+
+geom_point() +
+facet_wrap(as.factor(X28))
+View(data)
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color =as.factor(X28))) +
+geom_line() +
+geom_point() +
+facet_wrap(as.factor(X28))
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+facet_wrap(as.factor(X28))
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+facet_wrap(X28)
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+facet_wrap(~X28)
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+opts(legend.position = "none") +
+facet_wrap( ~ X28)
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ X28)
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ X28) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+data %>%
+ggplot(aes(x=newdate,
+y=X2000868.169999818,
+color = as.factor(X28))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ X28) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab("Time trend") +
+ylab("Whole Sales Price")
+View(data)
+View(data)
+data <- read.csv("./groupedData.csv/part-00000-0997b438-a0b5-49ae-aad3-dc6e9a4ebf90.csv",header = TRUE)
+colnames(data) <- c("date","price","type")
+type <- read.delim("./data/type.txt")
+View(data)
+View(type)
+data <- read.csv("./groupedData.csv/part-00000-0997b438-a0b5-49ae-aad3-dc6e9a4ebf90.csv",header = TRUE)
+colnames(data) <- c("date","price","type")
+type <- read.csv("./data/type.csv")
+data <- read.csv("./groupedData.csv/part-00000-0997b438-a0b5-49ae-aad3-dc6e9a4ebf90.csv",header = TRUE)
+colnames(data) <- c("date","price","type")
+type <- read.csv("./data/type.csv")
+View(type)
+data <- read.csv("./groupedData.csv/part-00000-0997b438-a0b5-49ae-aad3-dc6e9a4ebf90.csv",header = TRUE)
+colnames(data) <- c("date","price","type")
+type <- read.csv("./data/type.csv")
+colnames(type) <- c("type","TypeName")
+View(type)
+View(data)
+data <-
+data %>%
+mutate(newdate = as.yearmon(date, format='%Y/%m'))
+data %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(type))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ type) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab("Time trend") +
+ylab("Whole Sales Price")
+NewData <-
+data %>%
+left_join(type)
+View(NewData)
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab("Time trend") +
+ylab("Whole Sales Price")
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+#  geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab("Time trend") +
+ylab("Whole Sales Price")
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab("Time trend") +
+ylab("Whole Sales Price")
+View(NewData)
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab("Trend") +
+ylab("Whole Sales Price")
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab(" ") +
+ylab("Whole Sales Price")
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab(" ") +
+ylab("Monthly Sales Volume")
+View(data)
+data <- read.csv("./groupedData2.csv/part-00000-c6e252db-6b30-449b-aa19-1d0ee8a59764.csv",header = TRUE)
+colnames(data) <- c("date","price","type")
+type <- read.csv("./data/type.csv")
+colnames(type) <- c("type","TypeName")
+data <- read.csv("./groupedData2.csv/part-00000-c6e252db-6b30-449b-aa19-1d0ee8a59764.csv",header = TRUE)
+colnames(data) <- c("date","price","type")
+type <- read.csv("./data/type.csv")
+colnames(type) <- c("type","TypeName")
+data2 <- read.csv("./groupedData2.csv/part-00000-c6e252db-6b30-449b-aa19-1d0ee8a59764.csv",header = TRUE)
+colnames(data2) <- c("date","price","type")
+type <- read.csv("./data/type.csv")
+colnames(type) <- c("type","TypeName")
+View(data2)
+data <-
+data2 %>%
+mutate(newdate = as.yearmon(date, format='%Y/%m'),month=as.m)
+data <-
+data2 %>%
+mutate(newdate = as.yearmon(date, format='%Y/%m'))
+NewData <-
+data %>%
+left_join(type)
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab(" ") +
+ylab("Monthly Sales Volume")
+NewData %>%
+ggplot(aes(x=newdate,
+y=price,
+color = as.factor(TypeName))) +
+geom_line() +
+geom_point() +
+theme(legend.position = "none") +
+facet_wrap( ~ TypeName) +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+xlab(" ") +
+ylab("Mean Price")
+library(rpart)
+data <- read.csv("./data/Advertising.csv",header=True)
+data <- read.csv("./data/Advertising.csv", header = TRUE)
+View(data)
+library(rpart)
+library(caret)
+library(rpart)
+library(caret)
+library(ggplot2)
+data <- read.csv("./data/Advertising.csv", header = TRUE)
+ntrain<-createDataPartition(data,p=0.7,list=FALSE)
+training<-m_train[intrain,]
+View(data)
+ntrain<-createDataPartition(y=data$y,p=0.7,list=FALSE)
+df <- read.csv("./data/Advertising.csv", header = TRUE)
+ntrain<-createDataPartition(df$Sales,p=0.7,list=FALSE)
+training<-m_train[intrain,]
+View(ntrain)
+dim(df)
+randomSplit <-funtion(data,ratio)
+randomSplit <- function(data,ratio)
+{
+mx = dim(data)[1]
+index = createDataPartition(1:mx,p=0.7,list=FALSE)
+train = data[index,]
+test = data[-index,]
+return(train = train,test = test)
+}
+(train,test) = randomSplit(df,0.7)
+[train,test] = randomSplit(df,0.7)
+splited  = randomSplit(df,0.7)
+splited  = randomSplit(df,0.7)
+randomSplit <- function(data,ratio)
+{
+mx = dim(data)[1]
+index = createDataPartition(1:mx,p=0.7,list=FALSE)
+train = data[index,]
+test = data[-index,]
+list(train=train,test=test)
+}
+splited  = randomSplit(df,0.7)
+#train = splited
+splited  = randomSplit(df,0.7)
+train = splited$train
+test  = splited$test
+View(train)
+[train, test]  = randomSplit(df,0.7)
+splited  = randomSplit(df,0.7)
+train = splited$train
+test  = splited$test
+library(rpart)
+library(caret)
+library(ggplot2)
+install.packages('rattle')
+install.packages('rpart.plot')
+install.packages('RColorBrewer')
+library(rattle)
+library(rpart.plot)
+library(RColorBrewer)
+library(rpart)
+library(caret)
+library(ggplot2)
+#install.packages('rattle')
+#install.packages('rpart.plot')
+#install.packages('RColorBrewer')
+library(rattle)
+library(rpart.plot)
+library(RColorBrewer)
+df <- read.csv("./data/Advertising.csv", header = TRUE)
+randomSplit <- function(data,ratio)
+{
+mx = dim(data)[1]
+index = createDataPartition(1:mx,p=0.7,list=FALSE)
+train = data[index,]
+test = data[-index,]
+list(train=train,test=test)
+}
+splited  = randomSplit(df,0.7)
+train = splited$train
+test  = splited$test
+View(train)
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="class")
+plot(fit)
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="regression")
+?rpart
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="anova")
+plot(fit)
+plot(fit)
+text(fit)
+fancyRpartPlot(fit)
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="class")
+#plot(fit)
+#text(fit)
+fancyRpartPlot(fit)
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="anova")
+#plot(fit)
+#text(fit)
+fancyRpartPlot(fit)
+Prediction <- predict(fit, test, type = "anova")
+Prediction <- predict(fit, test, type = "class")
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="class")
+fancyRpartPlot(fit)
+Prediction <- predict(fit, test)
+View(Prediction)
+fit <- rpart(Sales ~ TV + Radio + Newspaper,
+data=train,
+method="anova")
+#plot(fit)
+#text(fit)
+fancyRpartPlot(fit)
+Prediction <- predict(fit, test, method="anova")
+Prediction <- predict(fit, test, method="anova")
+RMSE <- sqrt(mean((test$Sales-Prediction )^2))
+RMSE <- sqrt(mean((test$Sales-Prediction )^2))
+RMSE
+?fancyRpartPlot
+fancyRpartPlot(fit,sub="")
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+install.packages("RGtk2")
+install.packages("RGtk2")
+# specify the adjacency matrix
+A <- matrix(c(0,1,0,0,0,0,
+1,0,1,0,0,0,
+0,1,0,1,1,1,
+0,0,1,0,1,0,
+0,0,1,1,0,1,
+0,0,1,0,1,0 ),6,6, byrow= TRUE)
+EV <- eigen(A) # compute eigenvalues and eigenvectors
+max(EV$values)  # find the maximum eigenvalue
+# get the eigenvector associated with the largest eigenvalue
+centrality <- data.frame(EV$vectors[,1])
+names(centrality) <- "Centrality"
+print(centrality)
+B <- A + diag(6)
+EVB <- eigen(B) # compute eigenvalues and eigenvectors
+# they are the same as EV(A)
+# define matrix M
+M <- matrix(c(1,1,0,0,
+1,1,1,0,
+0,1,1,1,
+0,0,1,1),4,4, byrow= TRUE)
+# define function for B^k for matrix M
+MM <- function(k){
+n <- (k-1)
+B_K <- C
+for (i in 1:n){
+B_K <- B_K%*%M
+}
+return(B_K)
+}
+MM(2) # M^2
+MM(3) # M^3
+# define c
+c <- matrix(c(2,3,5,3,4,3))
+# define c_k for matrix B
+ck <- function(k){
+n <- (k-2)
+B_K <- B
+for (i in 1:n){
+B_K <- B_K%*%B
+}
+c_k <- B_K%*%c
+return(c_k)
+}
+# derive EV centrality as k -> infinity
+library(matrixcalc)
+# k  = 5
+ck(5)/frobenius.norm(ck(5))
+# k  = 10
+ck(10)/frobenius.norm(ck(10))
+print(v0)
+# k = 100
+ck(100)/frobenius.norm(ck(100))
+install.packages("matrixcalc")
+# specify the adjacency matrix
+A <- matrix(c(0,1,0,0,0,0,
+1,0,1,0,0,0,
+0,1,0,1,1,1,
+0,0,1,0,1,0,
+0,0,1,1,0,1,
+0,0,1,0,1,0 ),6,6, byrow= TRUE)
+EV <- eigen(A) # compute eigenvalues and eigenvectors
+max(EV$values)  # find the maximum eigenvalue
+# get the eigenvector associated with the largest eigenvalue
+centrality <- data.frame(EV$vectors[,1])
+names(centrality) <- "Centrality"
+print(centrality)
+B <- A + diag(6)
+EVB <- eigen(B) # compute eigenvalues and eigenvectors
+# they are the same as EV(A)
+# define matrix M
+M <- matrix(c(1,1,0,0,
+1,1,1,0,
+0,1,1,1,
+0,0,1,1),4,4, byrow= TRUE)
+# define function for B^k for matrix M
+MM <- function(k){
+n <- (k-1)
+B_K <- C
+for (i in 1:n){
+B_K <- B_K%*%M
+}
+return(B_K)
+}
+MM(2) # M^2
+MM(3) # M^3
+# define c
+c <- matrix(c(2,3,5,3,4,3))
+# define c_k for matrix B
+ck <- function(k){
+n <- (k-2)
+B_K <- B
+for (i in 1:n){
+B_K <- B_K%*%B
+}
+c_k <- B_K%*%c
+return(c_k)
+}
+# derive EV centrality as k -> infinity
+library(matrixcalc)
+# k  = 5
+ck(5)/frobenius.norm(ck(5))
+# k  = 10
+ck(10)/frobenius.norm(ck(10))
+print(v0)
+# k = 100
+ck(100)/frobenius.norm(ck(100))
+install.packages("RGtk2")
+setwd("~/Google Drive/MyGitHub/learning-apache-spark")

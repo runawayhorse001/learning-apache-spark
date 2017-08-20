@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Wenqiang Feng &amp; Ming Chen" />
+
+
+<title>Logistic Regression</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Learning Apache Spark</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    Getting Start
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">Installations</li>
+    <li>
+      <a href="install.html">Installations</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Integrate Spark</li>
+    <li>
+      <a href="pyspark-on-rodeo.html">Integrate spark with Rodeo</a>
+    </li>
+    <li>
+      <a href="pyspark-on-jupyter.html">Integrate spark with Jupyter</a>
+    </li>
+    <li>
+      <a href="spark-on-jetstream-cloud.html">Spark on jetstream cloud</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Preprocessing Template</li>
+    <li>
+      <a href="data-preprocessing-template.html">Data Preprocessing Template</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    Data Wrangling
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="data-manipulation.html">Basic DataFrame Manipulation</a>
+    </li>
+    <li>
+      <a href="pyspark-vectors.html">Pyspark Vectors</a>
+    </li>
+    <li>
+      <a href="featuresCol-and-labelCol.html">featuresCol &amp; labelCol</a>
+    </li>
+    <li>
+      <a href="StringIndexer-and-VectorIndexer.html">StringIndexer &amp; VectorIndexer</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">pyspark.RDD object</li>
+    <li>
+      <a href="aggregate-function.html">Aggregate Functions</a>
+    </li>
+    <li>
+      <a href="reduce-functions.html">Reduce Functions</a>
+    </li>
+    <li>
+      <a href="HashingTF-and-CountVectorizer.html">HashingTF and CountVectorizer</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    Machine Learning
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">Regression</li>
+    <li>
+      <a href="linearRegression.html">Linear Regression</a>
+    </li>
+    <li>
+      <a href="dttreeR.html">Decision tree Regression</a>
+    </li>
+    <li>
+      <a href="randomforest.html">Random Forest Regression</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Classification</li>
+    <li>
+      <a href="kmeans.html">Kmeans Classification</a>
+    </li>
+    <li>
+      <a href="dttreeC.html">Decision tree Classification</a>
+    </li>
+    <li>
+      <a href="randomforestC.html">Random Forest Classification</a>
+    </li>
+    <li>
+      <a href="logistic-regression.html">Logistic Regression</a>
+    </li>
+    <li>
+      <a href="svm.html">Support Vector Machine</a>
+    </li>
+    <li>
+      <a href="naive-baye.html">Naive Bayes</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Neural Network</li>
+    <li>
+      <a href="fnn.html">Feedforward Neural Network</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Natural Language Processing</li>
+    <li>
+      <a href="nlpC.html">Text Classification</a>
+    </li>
+    <li>
+      <a href="nlpLDA.html">Topic Model LDA</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Social Network Analysis</li>
+    <li>
+      <a href="sna.html">Social Network Analysis</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    Module Tuning and Evaluation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">Module Tuning</li>
+    <li>
+      <a href="regularization.html">Regularization</a>
+    </li>
+    <li>
+      <a href="k-folds-cross-validation.html">K-folds Cross Validation</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/MingChen0919/learning-apache-spark">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/mingchen0919">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Logistic Regression</h1>
+<h4 class="author"><em>Wenqiang Feng &amp; Ming Chen</em></h4>
+<h4 class="date"><em>2/8/2017</em></h4>
+
+</div>
+
+
+<div id="set-up-sparkcontext-and-sparksession" class="section level2">
+<h2>Set up sparkContext and sparkSession</h2>
+<pre class="python"><code># connecting to spark
+from pyspark import SparkConf, SparkContext
+## set up spark context
+conf = SparkConf().setAppName(&quot;myApp&quot;)
+sc = SparkContext(conf=conf)
+
+# create sparksession object
+from pyspark.sql import SparkSession
+sparksession = SparkSession(sc)</code></pre>
+</div>
+<div id="import-data" class="section level2">
+<h2>Import data</h2>
+<pre class="python"><code>horseshoe_crab = sparksession.read.csv(&quot;data/horseshoe_crab.csv&quot;, inferSchema=True, header=True)
+horseshoe_crab.show(n=5)</code></pre>
+</div>
+<div id="data-preprocessing" class="section level2">
+<h2>Data preprocessing</h2>
+<ul>
+<li>Convert column <em>Sa</em> to binary variable</li>
+</ul>
+<pre class="python"><code>bool_horseshoe_crab = horseshoe_crab.withColumn(&#39;boolean_Sa&#39;, horseshoe_crab[&#39;Sa&#39;].cast(&#39;boolean&#39;))
+bool_horseshoe_crab.show(n=5)</code></pre>
+<pre class="python"><code>+---+---+----+----+---+----------+
+|  C|  S|   W|  Wt| Sa|boolean_Sa|
++---+---+----+----+---+----------+
+|  2|  3|28.3|3.05|  8|      true|
+|  3|  3|26.0| 2.6|  4|      true|
+|  3|  3|25.6|2.15|  0|     false|
+|  4|  2|21.0|1.85|  0|     false|
+|  2|  3|29.0| 3.0|  1|      true|
++---+---+----+----+---+----------+</code></pre>
+<pre class="python"><code>new_horseshoe_crab = bool_horseshoe_crab.withColumn(&#39;binary_Sa&#39;, bool_horseshoe_crab[&#39;boolean_Sa&#39;].cast(&#39;integer&#39;))
+new_horseshoe_crab.show(n=5)</code></pre>
+<pre class="python"><code>+---+---+----+----+---+----------+---------+
+|  C|  S|   W|  Wt| Sa|boolean_Sa|binary_Sa|
++---+---+----+----+---+----------+---------+
+|  2|  3|28.3|3.05|  8|      true|        1|
+|  3|  3|26.0| 2.6|  4|      true|        1|
+|  3|  3|25.6|2.15|  0|     false|        0|
+|  4|  2|21.0|1.85|  0|     false|        0|
+|  2|  3|29.0| 3.0|  1|      true|        1|
++---+---+----+----+---+----------+---------+</code></pre>
+<ul>
+<li>Transform data into <strong>featuresCol</strong> and <strong>labelCol</strong> structure</li>
+</ul>
+<pre class="python"><code>from pyspark.ml.linalg import Vectors
+lor_horseshoe_crab = new_horseshoe_crab.rdd.map(lambda r: [Vectors.dense(r[0:3]), r[-1]]).toDF([&#39;features&#39;, &#39;label&#39;])
+lor_horseshoe_crab.show(n=5)</code></pre>
+<pre class="python"><code>+------------------+-----+
+|          features|label|
++------------------+-----+
+|[2.0,3.0,28.3,8.0]|    1|
+|[3.0,3.0,26.0,4.0]|    1|
+|[3.0,3.0,25.6,0.0]|    0|
+|[4.0,2.0,21.0,0.0]|    0|
+|[2.0,3.0,29.0,1.0]|    1|
++------------------+-----+</code></pre>
+<ul>
+<li>Index categorical predictors from the <em>featuresCol</em> column</li>
+</ul>
+<pre class="python"><code>from pyspark.ml.feature import VectorIndexer
+indexer = VectorIndexer(maxCategories=4, inputCol=&#39;features&#39;, outputCol=&#39;indexed_features&#39;)
+model = indexer.fit(lor_horseshoe_crab)
+lor_horseshoe_crab = model.transform(lor_horseshoe_crab)
+lor_horseshoe_crab.show(n=5)</code></pre>
+<pre class="python"><code>+------------------+-----+------------------+
+|          features|label|  indexed_features|
++------------------+-----+------------------+
+|[2.0,3.0,28.3,8.0]|    1|[1.0,2.0,28.3,8.0]|
+|[3.0,3.0,26.0,4.0]|    1|[2.0,2.0,26.0,4.0]|
+|[3.0,3.0,25.6,0.0]|    0|[2.0,2.0,25.6,0.0]|
+|[4.0,2.0,21.0,0.0]|    0|[3.0,1.0,21.0,0.0]|
+|[2.0,3.0,29.0,1.0]|    1|[1.0,2.0,29.0,1.0]|
++------------------+-----+------------------+</code></pre>
+</div>
+<div id="splitting-data-into-training-and-test-sets" class="section level2">
+<h2>Splitting data into training and test sets</h2>
+<pre class="python"><code>training, test = lor_horseshoe_crab.randomSplit(weights=[0.7, 0.3], seed=123)</code></pre>
+</div>
+<div id="building-logistic-regression-model-with-training-set" class="section level2">
+<h2>Building logistic regression model with training set</h2>
+<pre class="python"><code>from pyspark.ml.classification import LogisticRegression
+blor = LogisticRegression(featuresCol=&#39;indexed_features&#39;, labelCol=&#39;label&#39;, family=&#39;binomial&#39;)
+model = blor.fit(training)</code></pre>
+</div>
+<div id="model-statistics" class="section level2">
+<h2>Model Statistics</h2>
+<pre class="python"><code>model.summary.predictions.show(n=10)</code></pre>
+<ul>
+<li>prediction</li>
+</ul>
+<pre class="python"><code>+-------------------+-----+-------------------+--------------------+--------------------+----------+
+|           features|label|   indexed_features|       rawPrediction|         probability|prediction|
++-------------------+-----+-------------------+--------------------+--------------------+----------+
+| [1.0,1.0,26.0,2.3]|  1.0| [0.0,0.0,26.0,2.3]|[-1.5151489612951...|[0.18017697059573...|       1.0|
+| [1.0,1.0,27.4,2.7]|  1.0| [0.0,0.0,27.4,2.7]|[-2.2888807838235...|[0.09204804595158...|       1.0|
+| [1.0,1.0,27.7,2.5]|  1.0| [0.0,0.0,27.7,2.5]|[-2.1351081685803...|[0.10573103058138...|       1.0|
+|[1.0,1.0,28.0,2.62]|  0.0|[0.0,0.0,28.0,2.62]|[-2.3392565198163...|[0.08792351845230...|       1.0|
+| [1.0,1.0,29.3,3.2]|  1.0| [0.0,0.0,29.3,3.2]|[-3.2910095563872...|[0.03588090545959...|       1.0|
+|[1.0,2.0,24.5,1.95]|  1.0|[0.0,1.0,24.5,1.95]|[-0.6836177605015...|[0.33545433483694...|       1.0|
+| [1.0,3.0,25.8,2.6]|  0.0| [0.0,2.0,25.8,2.6]|[-1.6232508088143...|[0.16475703172839...|       1.0|
+| [2.0,1.0,22.5,1.6]|  1.0| [1.0,0.0,22.5,1.6]|[0.71763847632131...|[0.67208678163936...|       0.0|
+| [2.0,1.0,22.9,1.6]|  0.0| [1.0,0.0,22.9,1.6]|[0.62440115791289...|[0.65121886027244...|       0.0|
+| [2.0,1.0,23.1,2.0]|  0.0| [1.0,0.0,23.1,2.0]|[0.13038129060970...|[0.53254922625747...|       0.0|
++-------------------+-----+-------------------+--------------------+--------------------+----------+</code></pre>
+<ul>
+<li>intercept</li>
+</ul>
+<pre class="python"><code>model.intercept</code></pre>
+<pre class="python"><code>-7.1178336818210335</code></pre>
+<ul>
+<li>coefficients</li>
+</ul>
+<pre class="python"><code>model.coefficients</code></pre>
+<pre class="python"><code>DenseVector([-0.634, -0.0904, 0.2331, 1.1185])</code></pre>
+<ul>
+<li>Area under ROC</li>
+</ul>
+<pre class="python"><code>model.evaluate(training).areaUnderROC</code></pre>
+<pre class="python"><code>0.8060398505603983</code></pre>
+</div>
+<div id="apply-model-to-test-set" class="section level2">
+<h2>Apply model to test set</h2>
+<pre class="python"><code>fitted_test = model.transform(test)
+fitted_test.show(n=10)</code></pre>
+<pre class="python"><code>+-------------------+-----+-------------------+--------------------+--------------------+----------+
+|           features|label|   indexed_features|       rawPrediction|         probability|prediction|
++-------------------+-----+-------------------+--------------------+--------------------+----------+
+| [1.0,1.0,26.1,2.8]|    1| [0.0,0.0,26.1,2.8]|[-2.0977098010209...|[0.10931961576789...|       1.0|
+|[1.0,1.0,26.5,2.35]|    0|[0.0,0.0,26.5,2.35]|[-1.6876207603180...|[0.15608898960572...|       1.0|
+|[1.0,1.0,27.1,2.95]|    1|[0.0,0.0,27.1,2.95]|[-2.4985785500791...|[0.07595788904099...|       1.0|
+|[1.0,1.0,30.2,3.28]|    1|[0.0,0.0,30.2,3.28]|[-3.5902737644259...|[0.02684996465542...|       1.0|
+| [1.0,2.0,25.0,2.3]|    1| [0.0,1.0,25.0,2.3]|[-1.1916404655987...|[0.23296566819752...|       1.0|
+|[2.0,1.0,23.7,1.95]|    0|[1.0,0.0,23.7,1.95]|[0.04645046400945...|[0.51161052846028...|       0.0|
+| [2.0,1.0,24.3,2.0]|    0| [1.0,0.0,24.3,2.0]|[-0.1493306646155...|[0.46273655493059...|       1.0|
+| [2.0,1.0,24.9,2.3]|    1| [1.0,0.0,24.9,2.3]|[-0.6247375483023...|[0.34870473830470...|       1.0|
+|[2.0,1.0,26.8,2.55]|    0|[1.0,0.0,26.8,2.55]|[-1.3472405658042...|[0.20632187168645...|       1.0|
+| [2.0,1.0,28.0,2.9]|    1| [1.0,0.0,28.0,2.9]|[-2.0184285781160...|[0.11728157703955...|       1.0|
++-------------------+-----+-------------------+--------------------+--------------------+----------+</code></pre>
+<ul>
+<li>Model evaluation on test set</li>
+</ul>
+<pre class="python"><code>from pyspark.ml.evaluation import BinaryClassificationEvaluator
+evaluator = BinaryClassificationEvaluator(rawPredictionCol=&#39;rawPrediction&#39;)
+evaluator.evaluate(fitted_test)</code></pre>
+<pre class="python"><code>0.6637426900584795</code></pre>
+</div>
+
+<center>Copyright &copy; 2017 Ming Chen  & Wenqiang Feng. All rights reserved.</center>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
